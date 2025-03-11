@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chubby Foods</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero_section img {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!--Header-->
+    <header>
+        <div class="left">
+            <h1>CHUBBY FOODS</h1>
+        </div>
+        <div class="middle">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="menu_items.html">Menu Items</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="right">
+            <a href="order.html" class="order-now-btn">Order Now</a>
+        </div>
+    </header>
+
+    <!--Hero Section-->
+
+    <div class="hero_section">
+        <img src="/images/cropped.png" alt="hero image"/>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Feel free to get in touch with us through the form below...</p>
+        <div class="contact-container">
+            <div class="contact-form">
+                <form id="contactForm">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>                
+            </div>
+            <div class="contact-details">
+                <h4>Contact Details</h4>
+                <p>Phone: 076 973 2915</p>
+                <p>Email: devikawannigamage@gmail.com</p>
+                <a href="https://wa.me/+94769732915" target="_blank">
+                    <img src="/images/whatsapp.png" alt="WhatsApp">
+                    076 973 2915
+                </a>
+                <a href="https://www.facebook.com/chubbyfoodss" target="_blank">
+                    <img src="/images/facebook.png" alt="Facebook">
+                    www.facebook.com/chubbyfoodss
+                </a>
+                <a href="order.html" class="ordernow">Order Now</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <!-- Left Side -->
+            <div class="footer-left">
+                <div class="footer-brand">
+                    <h3>Chubby Foods</h3>
+                    <p>Homemade food with love, delivered to your doorstep.</p>
+                </div>
+                <div class="footer-connect">
+                    <h4>Connect With Us:</h4>
+                    <a href="https://wa.me/+94769732915" target="_blank">
+                        <img src="/images/whatsapp.png" alt="WhatsApp">
+                    </a>
+                    <a href="https://www.facebook.com/chubbyfoodss" target="_blank">
+                        <img src="/images/facebook.png" alt="Facebook">
+                    </a>
+                </div>
+            </div>
+            <!-- Right Side -->
+            <div class="footer-right">
+                <h4>Visit Us:</h4>
+                <p> Chubby Foods Food Shop, Puwakwaththa Road, Meegoda</p>
+                <p> Winners Institute Cafe</p>
+            </div>
+        </div>
+        <!-- Copyright (Full Width) -->
+        <div class="footer-copyright">
+            <p>© 2025 Chubby Foods. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <!--contact form submission-->
+    <script type="module" src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script type="module">
+        // Import Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { firebaseConfig } from './firebase-config.js'; 
+        import { contact_FormConfig } from "./config.js";
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Initialize EmailJS
+        emailjs.init(contact_FormConfig.publicKey);
+      
+        // Handle Form Submission
+        document.getElementById("contactForm").addEventListener("submit", async function(event) {
+          event.preventDefault(); 
+      
+          let name = document.getElementById("name").value;
+          let email = document.getElementById("email").value;
+          let message = document.getElementById("message").value;
+      
+        
+          if (name.trim() === "") {
+            alert("Name cannot be empty");
+            return;
+          }
+
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address");
+            return;
+            }
+
+          try {
+            await addDoc(collection(db, "contact_messages"), {
+              name: name,
+              email: email,
+              message: message,
+              timestamp: serverTimestamp(),
+            });
+
+            
+             // Collect form data
+            let formData = {
+                name: document.querySelector("input[name='name']").value,
+                email: document.querySelector("input[name='email']").value,
+                subject: "New Message from Chubby Foods Contact Form",
+                message: document.querySelector("textarea[name='message']").value
+            };
+    
+            emailjs.send(contact_FormConfig.serviceID, contact_FormConfig.templateID, formData)
+            .then(response => {
+                console.log("Message sent successfully!");
+                document.getElementById("contactForm").reset(); 
+            })
+            .catch(error => {
+                alert("Error sending message. Please try again.");
+                console.error("EmailJS Error:", error);
+            });
+                alert("Message sent successfully!");
+                document.getElementById("contactForm").reset();
+
+          } catch (error) {
+            console.error("Error sending message:", error);
+            alert("Error sending message. Please try again.");
+          }
+        });
+      </script>
+      
+    
+</body>
+</html>

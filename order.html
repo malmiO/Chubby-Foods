@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chubby Foods | Ordering Process</title>
+    <link rel="stylesheet" href="order.css">
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <header role="banner">
+        <div class="left">
+            <h1>CHUBBY FOODS</h1>
+        </div>
+        <div class="middle">
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="menu_items.html">Menu Items</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="right">
+            <a href="https://wa.me/+94769732915" target="_blank">
+                <img src="/images/whatsapp.png" alt="WhatsApp">
+            </a>
+            <a href="https://www.facebook.com/chubbyfoodss" target="_blank">
+                <img src="/images/facebook.png" alt="Facebook">
+            </a>
+        </div>
+    </header>
+
+    <!--Heading-->
+<div class="heading">
+    <h2>Plan Your Own Order !</h2>
+        <p>Your order will be sent directly to our WhatsApp! We'll confirm it soon.</p>
+        <div class="process-cards" >
+            <div class="process-card">
+                <h4>🎉 Select Your Event</h4>
+            </div>
+            <div class="arrow">
+                <img src="/images/right-arrows.png" alt="Arrow">
+            </div>
+            <div class="process-card">
+                <h4>📅 Pick the Date</h4>
+            </div>
+            <div class="arrow">
+                <img src="/images/right-arrows.png" alt="Arrow">
+            </div>
+            <div class="process-card">  
+                <h4>🍽️ Add Your Menu Items</h4>
+            </div>
+            <div class="arrow">
+                <img src="/images/right-arrows.png" alt="Arrow">
+            </div>
+            <div class="process-card">
+                <h4>✍️ Add Your Details</h4>
+            </div>
+            <div class="arrow">
+                <img src="/images/right-arrows.png" alt="Arrow">
+            </div>
+            <div class="process-card">
+                <h4>✅ Submit Your Order</h4>
+            </div>
+        </div>
+</div>
+
+<div class="chooose-plan">
+    <h3>Choose Your Event</h3>
+    <div class="event-cards">
+        <div class="event-card" onclick="scrollToOrderForm()">
+            <img src="/images/cake-947438_1280.jpg" alt="Birthday">
+            <h4>Birthday Party</h4>
+        </div>
+        <div class="event-card" onclick="scrollToOrderForm()">
+            <img src="/images/skewers-1206687_1280.jpg" alt="Anniversary">
+            <h4>Anniversary</h4>
+        </div>
+        <div class="event-card" onclick="scrollToOrderForm()">
+            <img src="/images/doughnuts-1868573_1280.jpg" alt="Office">
+            <h4>Office Party</h4>
+        </div>
+        <div class="event-card" onclick="scrollToOrderForm()">
+            <img src="/images/sushi-8113165_1280.jpg" alt="Other">
+            <h4>Other</h4>
+        </div>
+    </div>
+</div>
+
+    <!--Custom Your Order -->
+    <form class="order-form" id="order-form">
+        <h3>Custom Your Order</h3>
+        
+        <h5 id="event">Event: </h5>
+
+        <label>Order Required Date:</label>
+        <input type="date" id="order-date" required>
+
+        <h5>Your Menu Items</h5>
+        <div class="menu-selection">
+            <select id="menu-combo">
+                <option value="">Select a menu item</option>
+                <option value="Rice & Curry">Rice & Curry</option>
+                <option value="Spaghetti">Spaghetti</option>
+                <option value="Samosa">Samosa</option>
+                <option value="Ice Cream">Ice Cream</option>
+                <option value="Hoppers">Hoppers</option>
+                <option value="Wade">Wade</option>
+                <option value="Orange Juice">Orange Juice</option>
+                <option value="Fish Patty">Fish Patty</option>
+                <option value="Biscuit Pudding">Biscuit Pudding</option>
+                <option value="Milk Rice">Milk Rice</option>
+                <option value="Burger">Burger</option>
+                <option value="Coke">Coke</option>
+                <option value="Cutlet">Cutlet</option>
+                <option value="String Hoppers">String Hoppers</option>
+                <option value="Noodles">Noodles</option>
+                <option value="Pasta">Pasta</option>
+                <option value="Rice & Curry">Rice & Curry</option>
+                <option value="Mini Burger">Mini Burger</option>
+                <option value="Mini Pizza">Mini Pizza</option>
+                <option value="Vegetable Roti">Vegetable Roti</option>
+                <option value="Fish Roll">Fish Roll</option>
+                <option value="Egg Roll">Egg Roll</option>
+                <option value="Fish Roti">Fish Roti</option>
+                <option value="Chicken Roti">Chicken Roti</option>
+                <option value="Veg Sandwich">Veg Sandwich</option>
+                <option value="Egg Sandwich">Egg Sandwich</option>
+                <option value="Egg Bun">Egg Bun</option>
+                <option value="Chicken Sandwich">Chicken Sandwich</option>
+                <option value="Cheese Sandwich">Cheese Sandwich</option>
+                <option value="Fish Sandwich">Fish Sandwich</option>
+                <option value="Omelet Bun">Omelet Bun</option>
+                <option value="Sausages Bun">Sausages Bun</option>
+            </select>            
+            <input type="number" id="item-quantity" min="1" value="" placeholder="Qty">
+            <button type="button" class="add-item" onclick="addMenuItem()">+ Add Item</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="order-items">
+                <!-- Items will be added here dynamically -->
+            </tbody>
+        </table>
+        <br><br>
+        <label>Special requests :</label>
+        <textarea id="order-special requests" rows="3" placeholder="Any special food items or any special meals required !"></textarea>
+        <label>Notes:</label>
+        <textarea id="order-notes" rows="3" placeholder="Any special instructions..."></textarea>
+        <button type="button" class="submit-order" onclick="SaveOrder()">Save Order</button>
+    </form>
+
+    <!-- Customer Details -->
+<div class="customer-details">
+    <h3>Your Details</h3>
+    <form class="customer-form" id="customer-form">
+        <div class="form-group">
+            <label for="fname">Full Name</label>
+            <input type="text" id="fname" name="fullname" placeholder="Your name..">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your email..">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your phone number..">
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" placeholder="Your address..">
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" placeholder="Your city..">
+        </div>
+
+        <div class="form-group">
+            <label for="zip">Zip Code</label>
+            <input type="text" id="zip" name="zip" placeholder="Your zip code..">
+        </div>
+
+        <button type="button" class="submit-order" onclick="submitOrder()">Submit Order</button>
+    </form>
+</div>
+
+
+    <!--Order Report-->
+    <div class="order-report">
+        <h3>Your Order</h3>
+        <p>Order Date: <span id="order-report-date"></span></p>
+        <p>Name: <span id="order-report-name"></span></p>
+        <p>Email:<span id="order-report-email"></span></p>
+        <p>Phone:<span id="order-report-phone"></span></p>
+        <p>Address:<span id="order-report-address"></span></p>
+        <p>City: <span id="order-report-city"></span></p>
+        <p>Zip Code: <span id="order-report-zip"></span></p>
+        <h4>Order Items</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody id="order-report-items">
+            </tbody>
+        </table>
+        <p>Special Requests:<span id="order-report-special-requests"></span></p>
+        <p>Notes:<span id="order-report-notes"></span></p>
+
+        <button type="button" class="print-order-report" onclick="printOrderReport()">Print</button>    
+    </div>
+
+     <!-- Footer Section -->
+     <footer>
+        <div class="footer-container">
+            <!-- Left Side -->
+            <div class="footer-left">
+                <div class="footer-brand">
+                    <h3>Chubby Foods</h3>
+                    <p>Homemade food with love, delivered to your doorstep.</p>
+                </div>
+                <div class="footer-connect">
+                    <h4>Connect With Us:</h4>
+                    <a href="https://wa.me/+94769732915" target="_blank">
+                        <img src="/images/whatsapp.png" alt="WhatsApp">
+                    </a>
+                    <a href="https://www.facebook.com/chubbyfoodss" target="_blank">
+                        <img src="/images/facebook.png" alt="Facebook">
+                    </a>
+                </div>
+            </div>
+            <!-- Right Side -->
+            <div class="footer-right">
+                <h4>Visit Us:</h4>
+                <p>Location 1 : Chubby Foods Food Shop, Puwakwaththa Road, Meegoda</p>
+                <p>Location 2 : Winners Institute Cafe</p>
+            </div>
+        </div>
+        <!-- Copyright -->
+        <div class="footer-copyright">
+            <p>© 2025 Chubby Foods. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToOrderForm() {
+            const orderForm = document.getElementById('order-form');
+            if (orderForm) {
+                orderForm.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const orderDateInput = document.getElementById('order-date');
+            
+            // Get today's date
+            const today = new Date();
+            
+            // Format the date as yyyy-mm-dd (which is the format expected by <input type="date">)
+            const formattedDate = today.toISOString().split('T')[0];
+            
+            // Set the min attribute to today's date
+            orderDateInput.setAttribute('min', formattedDate+1);
+        });
+    </script>
+
+    <script src="order.js"></script>
+
+    <script>
+        // Function to add a menu item to the table
+        function addMenuItem() {
+            const menuCombo = document.getElementById('menu-combo');
+            const quantityInput = document.getElementById('item-quantity');
+            const tableBody = document.getElementById('order-items');
+        
+            // Validate selection and quantity
+            if (menuCombo.value && quantityInput.value > 0) {
+                // Create a new row
+                const newRow = tableBody.insertRow();
+                newRow.innerHTML = `
+                    <td>${menuCombo.value}</td>
+                    <td>${quantityInput.value}</td>
+                    <td><button type="button" onclick="removeMenuItem(this)">Remove</button></td>
+                `;
+        
+                // Clear inputs after adding
+                menuCombo.value = '';
+                quantityInput.value = "";
+            } else {
+                alert('Please select a menu item and enter a valid quantity.');
+            }
+        }
+        
+        // Function to remove a menu item from the table
+        function removeMenuItem(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+        
+        </script>
+
+        <script type="module" src="saveorder.js"></script>
+
+        </body>
+</html>

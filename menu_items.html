@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chubby Foods | Menu Items</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            padding-top: 100px; 
+        }
+
+        .container {
+            min-width: 500px;
+            margin: 50px;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .category-tab {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .category-tab:hover, .active-tab {
+            background-color: #ff6600;
+            color: white;
+        }
+
+        .category-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .menu-card img {
+            max-width: 250px;
+            height: 200px;
+            border-radius: 5px;
+        }
+
+        .menu-card:hover {
+            transition: 200ms;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                margin: 20px;
+            }
+
+            .category-tabs {
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .category-tab {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+
+            .menu-card {
+                width: 140px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+     <!--Header-->
+     <header>
+        <div class="left">
+            <h1>CHUBBY FOODS</h1>
+        </div>
+        <div class="middle">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="menu_items.html">Menu Items</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="right">
+            <a href="order.html" class="order-now-btn">Order Now</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Menu Items</h2>
+        
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <div class="category-tab active-tab" onclick="changeCategory('all')">All</div>
+            <div class="category-tab" onclick="changeCategory('breakfast')">Breakfast</div>
+            <div class="category-tab" onclick="changeCategory('lunch')">Lunch</div>
+            <div class="category-tab" onclick="changeCategory('dinner')">Dinner</div>
+            <div class="category-tab" onclick="changeCategory('drinks')">Drinks</div>
+            <div class="category-tab" onclick="changeCategory('savory')">Savory Items</div>
+            <div class="category-tab" onclick="changeCategory('other')">Other</div>
+        </div>
+
+        <!-- Menu Items Display -->
+        <div class="category-container" id="menu-items-container">
+            <!-- Menu items will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <!-- Left Side -->
+            <div class="footer-left">
+                <div class="footer-brand">
+                    <h3>Chubby Foods</h3>
+                    <p>Homemade food with love, delivered to your doorstep.</p>
+                </div>
+                <div class="footer-connect">
+                    <h4>Connect With Us:</h4>
+                    <a href="https://wa.me/+94769732915" target="_blank">
+                        <img src="/images/whatsapp.png" alt="WhatsApp">
+                    </a>
+                    <a href="https://www.facebook.com/chubbyfoodss" target="_blank">
+                        <img src="/images/facebook.png" alt="Facebook">
+                    </a>
+                </div>
+            </div>
+            <!-- Right Side -->
+            <div class="footer-right">
+                <h4>Visit Us:</h4>
+                <p> Chubby Foods Food Shop, Puwakwaththa Road, Meegoda</p>
+                <p> Winners Institute Cafe</p>
+            </div>
+        </div>
+        <!-- Copyright (Full Width) -->
+        <div class="footer-copyright">
+            <p>© 2025 Chubby Foods. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for menu items with images
+        const menuItems = [
+            { name: "Rice & Curry", category: "lunch", image: "/images/Rice&Curry.jpg" },
+            { name: "Spaghetti", category: "dinner", image: "/images/spaghetti-4750055_1280.jpg" },
+            { name: "Samosa", category: "savory", image: "/images/samosas.jpg" },
+            { name: "Ice Cream", category: "other", image: "/images/chocolate-8709260_1280.jpg" },
+            { name: "Hoppers", category: "breakfast", image: "/images/Egg hoppers.jpg" },
+            { name: "Wade", category: "savory", image: "/images/parippu-vada-6305692_1280.jpg" },
+            { name: "Orange Juice ", category: "drinks", image: "/images/drink-5977684_1280.jpg" },
+            { name: "Fish Patty", category: "savory", image: "/images/fish patty.jpg" },
+            { name: "Biscuit Pudding", category: "other", image: "/images/burger.jpg" },
+            { name: "Milk Rice", category: "breakfast", image: "/images/milkrice.jpg" },
+            { name: "Burger", category: "lunch", image: "/images/hamburger-494706_1280.jpg" },
+            { name: "Coke", category: "drinks", image: "/images/drink-462776_1280.jpg" },
+            { name: "Cutlet", category: "savory", image: "/images/cutlets.jpg" },
+            { name: "String Hoppers", category: "breakfast", image: "/images/indiappa-6303127_1280.jpg" },
+            { name: "Noodles", category: "breakfast", image: "/images/noodles.jpg" },
+            { name: "Pasta", category: "breakfast", image: "/images/pasta.jpg" },
+            { name: "Rice & Curry", category: "breakfast", image: "/images/riceandcurry.jpg" },
+            { name: "Mini Burger", category: "breakfast", image: "/images/miniburger.jpg" },
+            { name: "Mini Pizza", category: "breakfast", image: "/images/mini pizza.jpg" },
+            { name: "Vegetable Roti", category: "savory", image: "/images/veg roti.jpg" },
+            { name: "Fish Roll", category: "savory", image: "/images/chicken rolls.jpg" },
+            { name: "Egg Roll", category: "savory", image: "/images/egg rolls.jpg" },
+            { name: "Fish Roti", category: "savory", image: "/images/fish roti.jpg" },
+            { name: "Chicken Roti", category: "savory", image: "/images/fish roti.jpg" },
+            { name: "Veg Sandwich", category: "breakfast", image: "/images/veg sandwiches.jpg" },
+            { name: "Egg Sandwich", category: "breakfast", image: "/images/egg sandwiches.jpg" },
+            { name: "Egg Bun", category: "breakfast", image: "/images/egg bun.jpg" },
+            { name: "Chicken Sandwich", category: "breakfast", image: "/images/veg sandwiches.jpg" },
+            { name: "Cheese Sandwich", category: "breakfast", image: "/images/cheese sandwiches.jpg" },
+            { name: "Fish Sandwich", category: "breakfast", image: "/images/veg sandwiches.jpg" },
+            { name: "Omelet Bun", category: "breakfast", image: "/images/omlet.jpg" },
+            { name: "Sausages Bun", category: "breakfast", image: "/images/sausages bus.jpg" },
+            ];
+
+        // Change category and filter items
+        function changeCategory(category) {
+            // Highlight the active tab
+            const tabs = document.querySelectorAll(".category-tab");
+            tabs.forEach(tab => tab.classList.remove("active-tab"));
+            event.target.classList.add("active-tab");
+
+            // Filter and display menu items based on selected category
+            const filteredItems = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
+            displayMenuItems(filteredItems);
+        }
+
+        // Display menu items
+        function displayMenuItems(items) {
+            const container = document.getElementById("menu-items-container");
+            container.innerHTML = ''; // Clear previous items
+
+            items.forEach(item => {
+                const card = document.createElement("div");
+                card.classList.add("menu-card");
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <h4>${item.name}</h4>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initialize with 'All' category
+        displayMenuItems(menuItems);
+    </script>
+</body>
+</html>
